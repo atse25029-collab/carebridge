@@ -7,6 +7,7 @@ import { BookingsView } from './components/BookingsView';
 import { MessagesView } from './components/MessagesView';
 import { ProfileView } from './components/ProfileView';
 import { BookingFlow } from './components/BookingFlow';
+import { ChatbotView } from './components/ChatbotView';
 
 export default function App() {
   // Navigation & View states
@@ -169,6 +170,7 @@ export default function App() {
                 setPrefilledNote(note || '');
                 setIsBookingFlowOpen(true);
               }}
+              onNavigateToChatbot={() => setCurrentView('chatbot')}
             />
           )}
 
@@ -179,6 +181,10 @@ export default function App() {
               onRebook={handleRebook}
               onCancelBooking={handleCancelBooking}
             />
+          )}
+
+          {currentView === 'chatbot' && (
+            <ChatbotView />
           )}
 
           {currentView === 'messages' && (

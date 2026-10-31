@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Caregiver } from '../types';
 import { SVGMapContainer } from './SVGMapContainer';
-import { ShieldCheck, Users, Star, ArrowRight, Sparkles, Stethoscope, Trees, Milestone, ShoppingBag, Tag, ChevronRight, X } from 'lucide-react';
+import { ShieldCheck, Users, Star, ArrowRight, Sparkles, Stethoscope, Trees, Milestone, ShoppingBag, Tag, ChevronRight, X, Bot } from 'lucide-react';
 
 const AVAILABLE_CREDENTIALS = [
   { key: 'two-wheeler', label: 'Two-Wheeler', searchTags: ['Two-Wheeler License'] },
@@ -17,6 +17,7 @@ interface HomeViewProps {
   selectedCaregiver: Caregiver | null;
   onSelectCaregiver: (caregiver: Caregiver) => void;
   onRequestCompanion: (caregiver?: Caregiver, prefilledNote?: string) => void;
+  onNavigateToChatbot?: () => void;
 }
 
 export const HomeView: React.FC<HomeViewProps> = ({
@@ -26,6 +27,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   selectedCaregiver,
   onSelectCaregiver,
   onRequestCompanion,
+  onNavigateToChatbot,
 }) => {
   const [selectedCredentials, setSelectedCredentials] = React.useState<string[]>([]);
 
@@ -254,6 +256,30 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="p-2 rounded-xl bg-white/10 text-white">
             <Tag size={18} className="animate-pulse" />
           </div>
+        </div>
+
+        {/* Ask CareBot AI Banner */}
+        <div 
+          onClick={onNavigateToChatbot}
+          className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-indigo-950 to-sky-950 rounded-2xl p-3.5 text-white shadow-md flex items-center justify-between mt-1 flex-shrink-0 cursor-pointer group hover:shadow-lg transition-all active:scale-[0.98] border border-sky-500/20"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/30 flex-shrink-0">
+              <Bot size={22} className="group-hover:scale-110 transition-transform" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-bold">Ask CareBot AI</span>
+                <span className="bg-sky-500/20 text-sky-300 text-[8px] font-bold px-1.5 py-0.5 rounded-md border border-sky-400/30 flex items-center gap-0.5">
+                  <Sparkles size={8} /> Gemma 4:e2b
+                </span>
+              </div>
+              <p className="text-[9px] text-slate-300 mt-0.5 leading-tight">
+                Need eldercare advice or companion recommendations? Chat now &rarr;
+              </p>
+            </div>
+          </div>
+          <ChevronRight size={16} className="text-slate-400 group-hover:text-white transition-colors flex-shrink-0" />
         </div>
 
         {/* Quick Booking Services Grid */}

@@ -43,4 +43,4 @@ export interface Chat {
   messages: Message[];
 }
 
-export type ActiveView = 'home' | 'bookings' | 'messages' | 'profile';
+export type ActiveView = 'home' | 'bookings' | 'chatbot' | 'messages' | 'profile';

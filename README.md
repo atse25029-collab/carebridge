@@ -1,6 +1,7 @@
 # CareBridge 🌉
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-brightgreen?style=for-the-badge&logo=vercel)](https://carebridge-gules.vercel.app/)
+[![Gemma 4:e2b](https://img.shields.io/badge/AI_Model-Gemma_4:e2b-4285F4?style=for-the-badge&logo=google)](https://ollama.com/)
 [![React 19](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
@@ -20,7 +21,13 @@
 - **Interactive Smartphone Bezel:** Desktop visitors experience an interactive white smartphone mockup (complete with dynamic clock, status bar, and iOS home indicator). Mobile visitors receive a fluid, 100% responsive native-like viewport.
 - **Installable (PWA):** Equipped with a Web App Manifest (`manifest.json`) and Service Worker (`sw.js`). Users can add CareBridge to their home screen for an app-like experience with offline caching.
 
-### 🗺️ 2. Dynamic Chennai Vector Map
+### 🤖 2. CareBot AI Chatbot (Local Gemma 4:e2b via Ollama)
+- **Local On-Device Intelligence:** Powered by Google's `gemma4:e2b` running locally on your device via Ollama (configured with models in `E:\ollama models`).
+- **Eldercare Guidance for Chennai:** Understands Tamil cultural contexts, elderly companion needs, temple visits, post-op physiotherapy, and emergency protocols (108 Ambulance / Apollo Hospitals).
+- **Streaming Responses:** Smooth, real-time token streaming with cancel/stop controls, message copying, and conversation persistence.
+- **Connection Monitor & Settings:** Real-time health indicator (🟢 Online / 🔴 Offline) with configurable Ollama endpoint URLs, proxy routing (`/api/ollama`), and model selection.
+
+### 🗺️ 3. Dynamic Chennai Vector Map
 - Custom-crafted vector street map highlighting prominent Chennai corridors:
   - **Usman Road** (central shopping and transit hub in T. Nagar)
   - **Anna Salai / Mount Road** (diagonal arterial highway)
@@ -28,7 +35,7 @@
   - **Nageswara Rao Park** & **Cooum River** landmarks
 - **Animated Companions:** Caregiver markers slowly wander along streets in real time with dynamic coordinate offsets and active price badges (`₹120`, `₹150`, etc.).
 
-### 🏷️ 3. Credential-Based Pricing
+### 🏷️ 4. Credential-Based Pricing
 Pricing is tied directly to verified credentials, offering families flexible options ranging from affordable student companions to certified healthcare professionals:
 
 | Tier | Category | Hourly Rate | Verified Credentials | Typical Companion |
@@ -37,26 +44,22 @@ Pricing is tied directly to verified credentials, offering families flexible opt
 | **Standard** | Certified Helper | **₹150 – ₹190 / hr** | CPR Certified, First Aid Certified, BLS | Medical/psychology students (Priya, Meera, Rithika) |
 | **Premium** | Specialist / Nurse | **₹400 – ₹600 / hr** | RN (B.Sc. Nursing), Licensed LPN, BPT | Senior nurses & physiotherapists (Lakshmi RN, Sister Mary, Dr. Venkatraman PT) |
 
-### 🔍 4. Real-Time Credential Search & Filter
+### 🔍 5. Real-Time Credential Search & Filter
 - Tap verified credential tags on the Home dashboard (`Two-Wheeler`, `First Aid`, `CPR Certified`, `Nurse / Specialist`).
 - **Live Pin Filtering:** Non-matching pins vanish from the map instantly, and the bottom **Spotlight Carousel** shrinks in real time.
 - **Zero-State Fallback:** Displays a clean overlay modal when no caregivers meet the combination, allowing one-tap filter clearing.
 
-### ⚡ 5. Rapido-Style Bidding Booster
+### ⚡ 6. Rapido-Style Bidding Booster
 - During companion matching (`Find Companion Match`), if search takes time, an InDrive/Rapido-style booster card appears:
   - *"No one accepting? Boost your offer to find a match faster!"*
   - One-tap quick-add buttons: **+₹20/hr** and **+₹50/hr**.
   - Dynamically recalculates trip totals and triggers an instant simulated match acceptance within 2 seconds.
 
-### ⚠️ 6. Ola-Style Booking Cancellation
+### ⚠️ 7. Ola-Style Booking Cancellation
 - Active bookings feature an intuitive cancellation workflow with safety protections:
   - **Cancellation Warning:** Alerts users of a potential ₹50 cancellation fee to respect scheduled caregiver travel time.
   - **Reason Checklist:** Structured multi-choice reasons (*Plan changed*, *Booked by mistake*, *Rate too high*, *Caregiver too far*, or *Other*).
   - **Synchronized Chat Logs:** Automatically logs cancellation reasons directly into the caregiver chat thread.
-
-### 💬 7. Synchronized Caregiver Chat
-- Full in-app messaging interface with simulated caregiver auto-replies.
-- Synchronized with active bookings for seamless coordination.
 
 ---
 
@@ -72,13 +75,16 @@ d:/Carebridge/
 │   └── sw.js                # Service Worker for offline asset caching
 ├── src/
 │   ├── components/
-│   │   ├── BottomNav.tsx    # Bezel-nested bottom navigation bar
+│   │   ├── BottomNav.tsx    # 5-tab bezel-nested bottom navigation (Home, Bookings, CareBot, Messages, Profile)
 │   │   ├── BookingFlow.tsx  # Multi-step booking, bidding booster & confirmation
 │   │   ├── BookingsView.tsx # Bookings management & Ola-style cancellation sheet
-│   │   ├── HomeView.tsx     # Dashboard, credential filters & spotlight carousel
-│   │   ├── MessagesView.tsx # In-app chat interface with auto-responder
+│   │   ├── ChatbotView.tsx  # CareBot AI chat powered by local Gemma 4:e2b
+│   │   ├── HomeView.tsx     # Dashboard, credential filters, CareBot banner & spotlight carousel
+│   │   ├── MessagesView.tsx # In-app caregiver chat interface with auto-responder
 │   │   ├── ProfileView.tsx  # Recipient care profile, doctor logs & payment methods
 │   │   └── SVGMapContainer.tsx # Vector map with live coordinate walkers
+│   ├── services/
+│   │   └── ollamaService.ts # Ollama API client, health checker & Gemma streaming
 │   ├── data/
 │   │   └── mockData.ts      # Caregivers database, initial bookings & messages
 │   ├── types.ts             # TypeScript interface definitions
@@ -86,7 +92,7 @@ d:/Carebridge/
 │   ├── main.tsx             # Application entry point
 │   └── index.css            # Tailwind CSS utility layer
 ├── index.html               # Main HTML entry with PWA metadata
-├── vite.config.ts           # Vite bundler configuration (with allowedHosts: true)
+├── vite.config.ts           # Vite bundler configuration (with proxy to Ollama & allowedHosts: true)
 ├── package.json             # NPM dependencies and scripts
 └── README.md                # Project documentation
 ```
@@ -97,12 +103,13 @@ d:/Carebridge/
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18 or newer)
-- npm or yarn
+- [Ollama](https://ollama.com/) (installed with model `gemma4:e2b`)
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/atse25029-collab/carebridge.git
-cd carebridge
+### 1. Start Ollama with your local models
+Ensure Ollama points to your model storage (`E:\ollama models`):
+```powershell
+$env:OLLAMA_MODELS = "E:\ollama models"
+ollama serve
 ```
 
 ### 2. Install Dependencies
@@ -114,20 +121,13 @@ npm install
 ```bash
 npm run dev -- --host
 ```
-Open [http://localhost:5173/](http://localhost:5173/) on your desktop or access via your local Wi-Fi IP on a mobile device.
+Open [http://localhost:5173/](http://localhost:5173/) on your desktop or mobile device.
+Vite proxies `/api/ollama` directly to your local Ollama port `11434`.
 
-### 4. Remote Tunneling (ngrok)
-To test on any device over the internet:
-```bash
-ngrok http 5173
-```
-*(Vite is pre-configured with `server.allowedHosts: true` to prevent host header blocking)*
-
-### 5. Production Build
+### 4. Build for Production
 ```bash
 npm run build
 ```
-Creates an optimized production bundle in `dist/`.
 
 ---
 
