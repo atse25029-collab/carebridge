@@ -1,6 +1,6 @@
 # CareBridge 🌉
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-brightgreen?style=for-the-badge&logo=vercel)](https://carebridge-steel.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-brightgreen?style=for-the-badge&logo=vercel)](https://carebridge-gules.vercel.app/)
 [![React 19](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
@@ -9,7 +9,7 @@
 
 > **CareBridge** is an on-demand, mobile-first Progressive Web App (PWA) connecting families with verified local temporary caregivers and companions on an hourly basis. Built with care, localized for **Chennai, South India**.
 
-🔗 **Live Deployment:** [https://carebridge-steel.vercel.app/](https://carebridge-steel.vercel.app/)  
+🔗 **Live Deployment:** [https://carebridge-gules.vercel.app/](https://carebridge-gules.vercel.app/)  
 📁 **GitHub Repository:** [https://github.com/atse25029-collab/carebridge](https://github.com/atse25029-collab/carebridge)
 
 ---
@@ -133,7 +133,7 @@ Creates an optimized production bundle in `dist/`.
 
 ## 📱 How to Install the PWA
 
-1. Open **[https://carebridge-steel.vercel.app/](https://carebridge-steel.vercel.app/)** in your mobile browser (Chrome on Android, Safari on iOS).
+1. Open **[https://carebridge-gules.vercel.app/](https://carebridge-gules.vercel.app/)** in your mobile browser (Chrome on Android, Safari on iOS).
 2. **Android (Chrome):** Tap the install banner at the bottom or open the menu (⋮) $\rightarrow$ **Install App** / **Add to Home screen**.
 3. **iOS (Safari):** Tap the **Share** button ($\uparrow$) $\rightarrow$ **Add to Home Screen**.
 4. The CareBridge icon will appear on your phone home screen and launch in full-screen standalone mode!
